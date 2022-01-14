@@ -1,2 +1,2 @@
 # Hawk-Engine
-Hawk-Engine is an engine tool for pygame
+Hawk-Engine is an engine tool made for pygame
