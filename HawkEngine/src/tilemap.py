@@ -1,5 +1,4 @@
 import csv
-from this import d
 import pygame
 import os
 from src.tile import Tile
