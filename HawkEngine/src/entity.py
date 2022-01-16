@@ -24,6 +24,20 @@ class Entity:
         self
         )->None:
         self.window.blit(self.sprite,self.rect)
+    def move(
+        self
+        ):
+        keys=pygame.key.get_pressed()
+        self.position=self.controller.movement()
+        self.controller.friction()
+        if keys[pygame.K_d]or keys[pygame.K_RIGHT]:
+            self.controller.moving_right=True
+        if keys[pygame.K_a]or keys[pygame.K_LEFT]:
+            self.controller.moving_left=True
+        if keys[pygame.K_s]or keys[pygame.K_DOWN]:
+            self.controller.moving_down=True
+        if keys[pygame.K_w]or keys[pygame.K_UP]:
+            self.controller.moving_up=True
     def collide(
         self,
         tile_list
@@ -54,11 +68,8 @@ class Entity:
                 self.rect.top=tile.rect.bottom
                 collision_types["top"]=True
         return collision_types
-        
     def debug(
         self
         )->None:
-        pygame.draw.rect(self.window,(30,25,255),self.rect,1)
-        
-            
-        
+       # self.position[0] += 4
+        pygame.draw.rect(self.window,(30,25,255),self.rect,1)   
