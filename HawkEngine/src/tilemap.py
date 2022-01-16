@@ -1,10 +1,10 @@
-import csv
+import csv 
 import pygame
 import os
 from tile import Tile
 
 
-class TileMap():
+class TileMap:
     def __init__(
         self,
         file:str,
@@ -27,21 +27,34 @@ class TileMap():
             x=0
             for tile in row:
                 if tile=='0':
-                    tiles.append(Tile(pygame.Surface((16,16)),x*self.tile_size,y*self.tile_size,self.window))
+                    tiles.append(Tile(pygame.Surface((16,16)),"",x*self.tile_size,y*self.tile_size,self.window))
                 if tile=='1':
-                    tiles.append(Tile(pygame.Surface((16,16)),x*self.tile_size,y*self.tile_size,self.window))
+                    tiles.append(Tile(pygame.Surface((16,16)),"",x*self.tile_size,y*self.tile_size,self.window))
                 x+=1
             y+=1
         return tiles
-    
+    def load_tiles_camera(
+        self,
+        filename
+        ):
+        tiles=[]
+        map=self.read_file(filename)
+        x,y=0,0
+        for row in map:
+            x=0
+            for tile in row:
+                if tile=='0':
+                    tiles.append(Tile(pygame.Surface((16,16)),"",x*self.tile_size-self.camera.scroll[0],y*self.tile_size-self.camera.scroll[1],self.window))
+                if tile=='1':
+                    tiles.append(Tile(pygame.Surface((16,16)),"",x*self.tile_size-self.camera.scroll[0],y*self.tile_size-self.camera.scroll[1],self.window))
+                x+=1
+            y+=1
+        return tiles
     def render(
         self
         ):
         for tile in self.tiles:
             tile.draw()
-        
-    
-    
     def read_file(
         self,
         filename
