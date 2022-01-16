@@ -22,7 +22,11 @@ class Controller:
         if self.moving_up==True:
             position[1]=-4
         return position
-    def stop(
+    def friction(
         self
         ):
-        pass
+        self.moving_right=False
+        self.moving_left=False
+        self.moving_down=False
+        self.moving_up=False
+        
