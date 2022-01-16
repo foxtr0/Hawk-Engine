@@ -1,7 +1,7 @@
 import csv
 import pygame
 import os
-from src.tile import Tile
+from tile import Tile
 
 
 class TileMap():
