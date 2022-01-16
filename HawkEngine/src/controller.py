@@ -9,19 +9,28 @@ class Controller:
         self.moving_left=False
         self.moving_down=False
         self.moving_up=False
+        self.pressed_right=False
+        self.pressed_left=False
+        self.pressed_down=False
+        self.pressed_up=False
+        self.position=[0,0]
     def movement(
         self
         )->None:
-        position=[0,0]
+        
         if self.moving_right==True:
-            position[0]=4
+           self.position[0]=4
+        else:
+            self.position[0]=0
         if self.moving_left==True:
-            position[0]=-4
+            self.position[0]=-4
         if self.moving_down==True:
-            position[1]=4
+            self.position[1]=4
+        else:
+            self.position[1]=0
         if self.moving_up==True:
-            position[1]=-4
-        return position
+            self.position[1]=-4
+        return self.position
     def friction(
         self
         ):
