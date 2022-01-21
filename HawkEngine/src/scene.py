@@ -14,8 +14,7 @@ class Scene:
         self.dt=self.clock.tick(fps)
         self.running=False
         self.paused=False
-    def update(
+    def start(
         self
         ):
-        """Update function"""
         pass
