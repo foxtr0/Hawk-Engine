@@ -24,4 +24,4 @@ class App:
                 sys.exit()
         self.window.fill((0,0,0))    
         pygame.display.update()
-        self.clock.tick(60)
+        self.clock.tick(self.fps)
