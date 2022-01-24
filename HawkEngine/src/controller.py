@@ -17,7 +17,6 @@ class Controller:
     def movement(
         self
         )->None:
-        
         if self.moving_right==True:
            self.position[0]=4
         else:
@@ -38,4 +37,3 @@ class Controller:
         self.moving_left=False
         self.moving_down=False
         self.moving_up=False
-        
