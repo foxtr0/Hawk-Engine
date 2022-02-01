@@ -1,5 +1,6 @@
 import pygame
 import sys
+from display import Display
 
 class App:
     def __init__(
@@ -8,7 +9,7 @@ class App:
         size,
         fps
         ):
-        self.window=pygame.display.set_mode(size)
+        self.window=Display((800,800),(600,600))
         self.clock=pygame.time.Clock()
         self.fps=fps
         self.title=pygame.display.set_caption(title)
@@ -22,6 +23,7 @@ class App:
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
                 sys.exit()
-        self.window.fill((0,0,0))    
+        self.window.display.fill((0,0,0))    
         pygame.display.update()
+        self.window.update()
         self.clock.tick(self.fps)
