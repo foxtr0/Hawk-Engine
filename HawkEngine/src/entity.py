@@ -10,7 +10,8 @@ class Entity:
         health:float=100,
         position:list=[0,0],
         controller:Controller=None,
-        amount:int=1
+        amount:int=1,
+        camera=None
         ):
         self.window=window
         self.sprite=sprite
@@ -19,14 +20,21 @@ class Entity:
         self.position=position
         self.rect=pygame.Rect(self.position[0],self.position[1],self.sprite.get_width(),self.sprite.get_height())
         self.killed=False
+        self.alive=True
         self.controller=controller
+        self.camera=camera
     def render(
         self
         )->None:
-        self.window.blit(self.sprite,self.rect)
+        """Blits the sprite"""
+        if self.camera is None:
+            self.window.blit(self.sprite,self.rect)
+        if self.camera is not None:
+            self.window.blit(self.sprite,(self.rect.x-self.camera.scroll[0],self.rect.y-self.camera.scroll[1]))
     def move(
         self
         ):
+        """Moves the entity by detecting input"""
         keys=pygame.key.get_pressed()
         self.position=self.controller.movement()
         self.controller.friction()
@@ -42,6 +50,7 @@ class Entity:
         self,
         tile_list
         ):
+        """Makes the entity collidable with the `Tile` class's rect"""
         collision_types={"right":False,"left":False,"top":False,"bottom":False}
         self.rect.x+=self.position[0]
         hit=[]
@@ -68,8 +77,13 @@ class Entity:
                 self.rect.top=tile.rect.bottom
                 collision_types["top"]=True
         return collision_types
+    def get_position(
+        self
+        ):
+        return self.position
     def debug(
         self
         )->None:
-       # self.position[0] += 4
-        pygame.draw.rect(self.window,(30,25,255),self.rect,1)   
+        """debugs the entity by drawing the rect"""
+        pygame.draw.rect(self.window,(30,25,255),self.rect,1)
+
