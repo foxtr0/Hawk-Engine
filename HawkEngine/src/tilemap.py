@@ -4,13 +4,13 @@ import os
 from tile import Tile
 
 
-class TileMap:
+class TileMap():
     def __init__(
         self,
         file:str,
         tilesize:int,
-        camera:None,
-        window:pygame.Surface
+        camera:None=None,
+        window:pygame.Surface=None
         ):
         self.tile_size=tilesize
         self.camera=camera
@@ -23,32 +23,26 @@ class TileMap:
         tiles=[]
         map=self.read_file(filename)
         x,y=0,0
-        for row in map:
-            x=0
-            for tile in row:
-                if tile=='0':
-                    tiles.append(Tile(pygame.Surface((16,16)),"",x*self.tile_size,y*self.tile_size,self.window))
-                if tile=='1':
-                    tiles.append(Tile(pygame.Surface((16,16)),"",x*self.tile_size,y*self.tile_size,self.window))
-                x+=1
-            y+=1
-        return tiles
-    def load_tiles_camera(
-        self,
-        filename
-        ):
-        tiles=[]
-        map=self.read_file(filename)
-        x,y=0,0
-        for row in map:
-            x=0
-            for tile in row:
-                if tile=='0':
-                    tiles.append(Tile(pygame.Surface((16,16)),"",x*self.tile_size-self.camera.scroll[0],y*self.tile_size-self.camera.scroll[1],self.window))
-                if tile=='1':
-                    tiles.append(Tile(pygame.Surface((16,16)),"",x*self.tile_size-self.camera.scroll[0],y*self.tile_size-self.camera.scroll[1],self.window))
-                x+=1
-            y+=1
+        if self.camera is None:
+            for row in map:
+                x=0
+                for tile in row:
+                    if tile=='0':
+                        tiles.append(Tile(pygame.Surface((16,16)),"ground",x*self.tile_size,y*self.tile_size,self.window))
+                    if tile=='1':
+                        tiles.append(Tile(pygame.Surface((16,16)),"one-way",x*self.tile_size,y*self.tile_size,self.window))
+                    x+=1
+                y+=1
+        if self.camera is not None:
+            for row in map:
+                x=0
+                for tile in row:
+                    if tile=='0':
+                        tiles.append(Tile(pygame.Surface((16,16)),"ground",x*self.tile_size-self.camera.scroll[0],y*self.tile_size-self.camera.scroll[1],self.window))
+                    if tile=='1':
+                        tiles.append(Tile(pygame.Surface((16,16)),"one-way",x*self.tile_size-self.camera.scroll[0],y*self.tile_size-self.camera.scroll[1],self.window))
+                    x+=1
+                y+=1
         return tiles
     def render(
         self
@@ -65,8 +59,3 @@ class TileMap:
             for row in data:
                 map.append(list(row))
         return map
-            
-    
-        
-        
-        
