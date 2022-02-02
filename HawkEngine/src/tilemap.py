@@ -28,9 +28,9 @@ class TileMap():
                 x=0
                 for tile in row:
                     if tile=='0':
-                        tiles.append(Tile(pygame.Surface((16,16)),"ground",x*self.tile_size,y*self.tile_size,self.window))
+                        tiles.append(Tile(pygame.Surface((16,16)),"ground",x*self.tile_size,y*self.tile_size,self.window,None))
                     if tile=='1':
-                        tiles.append(Tile(pygame.Surface((16,16)),"one-way",x*self.tile_size,y*self.tile_size,self.window))
+                        tiles.append(Tile(pygame.Surface((16,16)),"one-way",x*self.tile_size,y*self.tile_size,self.window,None))
                     x+=1
                 y+=1
         if self.camera is not None:
@@ -38,9 +38,9 @@ class TileMap():
                 x=0
                 for tile in row:
                     if tile=='0':
-                        tiles.append(Tile(pygame.Surface((16,16)),"ground",x*self.tile_size-self.camera.scroll[0],y*self.tile_size-self.camera.scroll[1],self.window))
+                        tiles.append(Tile(pygame.Surface((16,16)),"ground",x*self.tile_size,y*self.tile_size,self.window,self.camera))
                     if tile=='1':
-                        tiles.append(Tile(pygame.Surface((16,16)),"one-way",x*self.tile_size-self.camera.scroll[0],y*self.tile_size-self.camera.scroll[1],self.window))
+                        tiles.append(Tile(pygame.Surface((16,16)),"one-way",x*self.tile_size,y*self.tile_size,self.window,self.camera))
                     x+=1
                 y+=1
         return tiles
@@ -59,3 +59,8 @@ class TileMap():
             for row in data:
                 map.append(list(row))
         return map
+            
+    
+        
+        
+        
