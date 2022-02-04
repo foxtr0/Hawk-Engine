@@ -4,10 +4,12 @@ class Scene:
     def __init__(
         self,
         window,
-        clock
+        clock,
+        dt
         ):
         self.window=window
         self.clock=clock
+        self.dt=dt
         self.running=False
         self.paused=False
     def pause(
@@ -19,5 +21,6 @@ class Scene:
         self
         ):
         """Update function"""
-        pass
+        if not self.pause:
+            self.update()
         
