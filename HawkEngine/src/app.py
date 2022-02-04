@@ -9,10 +9,10 @@ class App:
         size,
         fps
         ):
-        self.window=Display((800,800),(600,600))
+        self.window=Display(size,(600,600),title)
         self.clock=pygame.time.Clock()
         self.fps=fps
-        self.title=pygame.display.set_caption(title)
+        self.dt=None
     def quit(
         self
         ):
@@ -20,10 +20,10 @@ class App:
     def start(
         self
         ):
+        self.dt=self.clock.tick(self.fps)/1000
         for event in pygame.event.get():
             if event.type==pygame.QUIT:
-                sys.exit()
+                self.quit()
         self.window.display.fill((0,0,0))    
         pygame.display.update()
         self.window.update()
-        self.clock.tick(self.fps)
