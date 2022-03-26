@@ -16,8 +16,8 @@ class ExampleGame(Scene):
         self.camera=Camera([300,300],[10,10])
         self.player_sprite=pygame.Surface((16,16))
         self.player_sprite.fill((255,0,0))
-        self.player=Entity("player",self.player_sprite,self.window.display,100,[40,20],Controller(),1,self.camera)
-        self.map=TileMap("src/res/1.csv",16,self.camera,self.window.display)
+        self.player=Entity("player",self.player_sprite,self.window.display,100,pygame.math.Vector2(0,0),Controller(),1,self.camera)
+        self.map=TileMap("res/1.csv",16,self.camera,self.window.display)
         
     def update(self):
         self.window.display.fill((255,255,255))
@@ -47,7 +47,6 @@ game=Game("Example Game", (800,800),60)
 
 while True:
     game.start()
-
 
 
 
