@@ -13,22 +13,22 @@ class Controller:
         self.pressed_left=False
         self.pressed_down=False
         self.pressed_up=False
-        self.position=[0,0]
+        self.position=pygame.math.Vector2(0,0)
     def movement(
         self
         )->None:
         if self.moving_right==True:
-           self.position[0]=4
+           self.position.x=4
         else:
-            self.position[0]=0
+            self.position.x=0
         if self.moving_left==True:
-            self.position[0]=-4
+            self.position.x=-4
         if self.moving_down==True:
-            self.position[1]=4
+            self.position.y=4
         else:
-            self.position[1]=0
+            self.position.y=0
         if self.moving_up==True:
-            self.position[1]=-4
+            self.position.y=-4
         return self.position
     def friction(
         self
